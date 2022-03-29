@@ -1,0 +1,42 @@
+// import ConsultationItem from "./ConsultationItem.vue";
+import { mapWritableState } from "pinia";
+// import { ConsultationStore } from "../stores/consultation";
+
+export default {
+//   components: { ConsultationItem },
+//   data() {
+//     return {
+//       consultations: [],
+//     };
+//   },
+//   mounted() {
+//     this.fetchConsultation();
+//   },
+  computed: {
+    ...mapWritableState(ConsultationStore, {
+      storeConsultation: "consultation",
+    }),
+  },
+//   methods: {
+//     async fetchConsultation() {
+//       let consultations = await fetch(
+//         "https://apidoctor.quidam.re/api/consultations",
+//         {
+//           method: "GET",
+//           headers: {
+//             Authorization: `Bearer ${localStorage.getItem("token")}`,
+//           },
+//         }
+//       )
+//         .then((consultations) => consultations.json())
+//         .catch((e) => e);
+//       console.log(consultations);
+//       if (consultations instanceof Array) {
+//         this.consultations = consultations;
+//       }
+//     },
+//   },
+};
+import { ConsultationStore } from "../stores/consultation";
+
+const Store = ConsultationStore();
