@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="Consultation">
-      <h1>Mes Consultation</h1>
+      <h1>Mes Consultations</h1>
     </div>
     <div
       v-for="consultation in consultations"
@@ -18,31 +18,18 @@
 import { onMounted, ref } from "vue";
 import ConsultationItem from "./ConsultationItem.vue";
 import { ConsultationStore } from "../stores/consultation";
+import fetchConsultation from "../plugins/fetch"
+import { useUserStore } from "../stores/token";
+import { fetchConsults } from "../plugins/fetch";
 
-const consultations = ref([]);
+const consultationsStore = ConsultationStore();
+const userStore = useUserStore();
 
-async function fetchConsultation() {
-  let response = await fetch(
-    "https://apidoctor.quidam.re/api/consultations",
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  )
-    .then((r) => r.json())
-    .catch();
-  console.log(response);
-  if (response instanceof Object) {
-    console.log(response["hydra:member"]);
-    consultations.value = response["hydra:member"];
-    console.log("coucou");
-  }
-}
 
 onMounted(() => {
-  fetchConsultation();
+  fetchConsultation(userStore.token).then((consultDatas) => {
+    consultationsStore.consultations = consultDatas["hydra:member"];
+  });
 });
 
 </script>
