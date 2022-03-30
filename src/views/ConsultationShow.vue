@@ -17,6 +17,6 @@ const route = useRoute();
 const store = ConsultationStore();
 
 onMounted(() => {
-  consultation.value = store.consultations.find( (c) => String(c.id) === route.params.id);
+  consultation.value = store.consultation.find( (c) => String(c.id) === route.params.id);
 });
 </script>
