@@ -1,5 +1,7 @@
 
 import type { User } from "../types/userType";
+import { useUserStore } from "@/stores/token";
+const userStore = useUserStore();
 
 export default async function fetchLogin(user: User) {
   let response = await fetch("https://apidoctor.quidam.re/api/login_check", {
@@ -20,7 +22,7 @@ export async function fetchConsults(token: string) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${userStore.token}`,
     },
   })
     .then((promise) => promise.json())
