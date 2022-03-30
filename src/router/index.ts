@@ -30,7 +30,7 @@ const router = createRouter({
     {
       path: "/ShowConsult",
       name: "ShowConsult",
-      component: () => import("../views/ConsultationItem.vue"),
+      component: () => import("../views/ConsultationShow.vue"),
     },
   ]
 })

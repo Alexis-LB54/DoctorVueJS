@@ -21,6 +21,7 @@
 // import Login from "../components/forms/Login.vue";
 import { ref } from "@vue/reactivity";
 import fetchLogin from "../plugins/fetch";
+import { useUserStore } from "../stores/token"
 
 // async function FormSubmit(user) {
 //   let datas = {
@@ -53,8 +54,11 @@ const user = ref({
   username: "",
   password: "",
 });
+const tokenStore = useUserStore();
+
 const FormSubmit = () => {
-  fetchLogin(user.value);
+  fetchLogin(user.value).then((response) => tokenStore.token = response.token);
+  fetchLogin(user.value).then((response) => tokenStore.refresh_token = response.refresh_token);
 };
 </script>
 
