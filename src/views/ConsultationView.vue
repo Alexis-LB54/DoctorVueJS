@@ -14,7 +14,6 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-
 import { ConsultationStore } from "../stores/consultation";
 import fetchConsultation from "../plugins/fetch";
 import { useUserStore } from "../stores/token";
